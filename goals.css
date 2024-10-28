@@ -132,7 +132,7 @@ h2 i {
 }
 
 .next-btn {
-    background-color: #74b9ff;
+    background-color: #3eecac;
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -149,9 +149,9 @@ h2 i {
 }
 
 .next-btn:hover {
-    background-color: #0984e3;
+    background-color: #2dd4a1;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(62, 236, 172, 0.4);
 }
 
 .next-btn i {

@@ -75,7 +75,7 @@ h2 i {
 }
 
 .next-btn {
-    background-color: #74b9ff;
+    background-color: #ff9a9e;    /* Changed to match the gradient start color */
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -92,9 +92,9 @@ h2 i {
 }
 
 .next-btn:hover {
-    background-color: #0984e3;
+    background-color: #ff8589;    /* Slightly darker shade of the same pink */
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);    /* Updated shadow color to match */
 }
 
 .next-btn i {
