@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.affirmation-container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+h2 i {
+    margin-right: 10px;
+    color: #ff7eb3;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.affirmation-card {
+    background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.quote-icon {
+    color: #ff7eb3;
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.fa-quote-left {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.fa-quote-right {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.affirmation-text {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    line-height: 1.6;
+    margin: 1.5rem 0;
+    padding: 0 2rem;
+    font-style: italic;
+}
+
+.next-btn {
+    background-color: #ff7eb3;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.next-btn:hover {
+    background-color: #ff65a3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 126, 179, 0.4);
+}
+
+.next-btn i {
+    font-size: 0.9em;
+}
+
+@media (max-width: 480px) {
+    .affirmation-container {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .affirmation-text {
+        font-size: 1.2rem;
+        padding: 0 1.5rem;
+    }
+}
+
+/* Add a subtle animation for the affirmation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.affirmation-text {
+    animation: fadeIn 1s ease-out;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's on Your Mind for Tomorrow?</title>
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h2><i class="fas fa-list-check"></i> What's on Your Mind for Tomorrow?</h2>
+        <p class="subtitle">Plan ahead and set your intentions for tomorrow...</p>
+        
+        <div class="todo-list-wrapper">
+            <div id="todo-list" class="todo-list">
+                <!-- Todo items will be added here -->
+            </div>
+            
+            <div class="add-todo-wrapper">
+                <input 
+                    type="text" 
+                    id="new-todo" 
+                    placeholder="Type a task and press Enter..."
+                    maxlength="100"
+                >
+                <button class="add-btn" onclick="addTodo()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="saveAndNavigate('goals.html')">
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const todoList = document.getElementById('todo-list');
+        const newTodoInput = document.getElementById('new-todo');
+        let todos = [];
+
+        // Add todo when Enter is pressed
+        newTodoInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+        function addTodo() {
+            const todoText = newTodoInput.value.trim();
+            if (todoText) {
+                todos.push(todoText);
+                renderTodos();
+                newTodoInput.value = '';
+                saveTodos();
+            }
+        }
+
+        function removeTodo(index) {
+            todos.splice(index, 1);
+            renderTodos();
+            saveTodos();
+        }
+
+        function renderTodos() {
+            todoList.innerHTML = todos.map((todo, index) => `
+                <div class="todo-item">
+                    <span class="bullet">•</span>
+                    <span class="todo-text">${todo}</span>
+                    <button class="delete-btn" onclick="removeTodo(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function saveTodos() {
+            localStorage.setItem('userTodos', JSON.stringify(todos));
+        }
+
+        function saveAndNavigate(page) {
+            if (todos.length < 1) {
+                alert('Please add at least one task before continuing.');
+                return;
+            }
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

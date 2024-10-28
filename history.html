@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Journey So Far</title>
+    <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="history-container">
+        <h2><i class="fas fa-history"></i> Your Journey So Far</h2>
+        <p class="subtitle">Reflect on your past entries...</p>
+
+        <div class="date-selector">
+            <input type="date" id="dateSelector" class="date-input">
+            <button onclick="loadDataForDate()" class="view-btn">
+                View Entry <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="history-content" id="historyContent">
+            <!-- Data will be loaded here -->
+        </div>
+
+        <button class="home-btn" onclick="window.location.href='index.html'">
+            Back to Home <i class="fas fa-home"></i>
+        </button>
+    </div>
+
+    <script>
+        // Set max date to today
+        const datePicker = document.getElementById('dateSelector');
+        datePicker.max = new Date().toISOString().split('T')[0];
+        
+        function loadDataForDate() {
+            const selectedDate = document.getElementById('dateSelector').value;
+            if (!selectedDate) {
+                alert('Please select a date');
+                return;
+            }
+
+            const historyContent = document.getElementById('historyContent');
+            
+            // Clear previous content
+            historyContent.innerHTML = '';
+
+            // Try to load data for the selected date
+            const mood = JSON.parse(localStorage.getItem(`mood_${selectedDate}`));
+            const affirmation = localStorage.getItem(`affirmation_${selectedDate}`);
+            const goals = JSON.parse(localStorage.getItem(`goals_${selectedDate}`));
+            const activities = JSON.parse(localStorage.getItem(`activities_${selectedDate}`));
+            const todos = JSON.parse(localStorage.getItem(`todos_${selectedDate}`));
+
+            if (!mood && !affirmation && !goals && !activities && !todos) {
+                historyContent.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-calendar-times"></i>
+                        <p>No entries found for this date</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Build the content
+            let html = `<div class="history-entry">`;
+
+            if (mood) {
+                html += `
+                    <div class="section">
+                        <h3><i class="fas fa-heart"></i> Mood</h3>
+                        <p class="mood-emoji">${mood.mood}</p>
+                    </div>
+                `;
+            }
+
+            if (affirmation) {
+                html += `
+                    <div class="section">
+                        <h3><i class="fas fa-star"></i> Daily Affirmation</h3>
+                        <p>${affirmation}</p>
+                    </div>
+                `;
+            }
+
+            if (goals && goals.length > 0) {
+                html += `
+                    <div class="section">
+                        <h3><i class="fas fa-bullseye"></i> Goals</h3>
+                        <ul>
+                            ${goals.map(goal => `<li>${goal}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (activities && activities.length > 0) {
+                html += `
+                    <div class="section">
+                        <h3><i class="fas fa-clipboard-list"></i> Activities</h3>
+                        <ul>
+                            ${activities.map(activity => `<li>${activity}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            if (todos && todos.length > 0) {
+                html += `
+                    <div class="section">
+                        <h3><i class="fas fa-tasks"></i> Todo List</h3>
+                        <ul>
+                            ${todos.map(todo => `<li>${todo}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+            historyContent.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

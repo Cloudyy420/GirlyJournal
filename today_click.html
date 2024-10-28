@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Favorite Moment from Today</title>
+    <link rel="stylesheet" href="today_click.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="click-container">
+        <h2>Share Your Favorite Moment</h2>
+        <p class="subtitle">Upload a photo that made you smile today 📸</p>
+        
+        <div class="upload-area" id="dropZone">
+            <input type="file" id="imageUpload" accept="image/*" hidden>
+            <div class="upload-content">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag and drop your image here or</p>
+                <button class="upload-btn" onclick="document.getElementById('imageUpload').click()">
+                    Choose File
+                </button>
+            </div>
+            <br>
+            <div id="preview" class="image-preview"></div>
+        </div>
+        <br>
+
+        <button class="next-btn" onclick="navigateTo('thoughts.html')" disabled>
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('dropZone');
+    const imageUpload = document.getElementById('imageUpload');
+    const preview = document.getElementById('preview');
+    const nextBtn = document.querySelector('.next-btn');
+
+    // Handle drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = '#3498db';
+        dropZone.style.backgroundColor = '#f7f9fc';
+    });
+
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = '#bdc3c7';
+        dropZone.style.backgroundColor = 'transparent';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        handleFile(files[0]);
+    });
+
+    // Handle file input change
+    imageUpload.addEventListener('change', (e) => {
+        handleFile(e.target.files[0]);
+    });
+
+    function handleFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.style.display = 'block';
+                preview.innerHTML = `<img src="${e.target.result}" alt="Uploaded preview">`;
+                nextBtn.disabled = false;
+                
+                // Save to localStorage
+                localStorage.setItem('uploadedImage', e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please upload an image file!');
+        }
+    }
+});
+
+function navigateTo(page) {
+    if (localStorage.getItem('uploadedImage')) {
+        window.location.href = page;
+    } else {
+        alert('Please upload an image first!');
+    }
+}
+    </script>
+</body>
+</html>

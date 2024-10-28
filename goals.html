@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Goals</title>
+    <link rel="stylesheet" href="goals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="goals-container">
+        <h2><i class="fas fa-bullseye"></i> Set Your Goals</h2>
+        <p class="subtitle">What would you like to achieve?</p>
+        
+        <div class="goals-list-wrapper">
+            <div id="goals-list" class="goals-list">
+                <!-- Goals will be added here -->
+            </div>
+            
+            <div class="add-goal-wrapper">
+                <input 
+                    type="text" 
+                    id="new-goal" 
+                    placeholder="Type a goal and press Enter..."
+                    maxlength="100"
+                >
+                <button class="add-btn" onclick="addGoal()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="saveAndNavigate('activities.html')">
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const goalsList = document.getElementById('goals-list');
+        const newGoalInput = document.getElementById('new-goal');
+        let goals = [];
+
+        // Add goal when Enter is pressed
+        newGoalInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addGoal();
+            }
+        });
+
+        function addGoal() {
+            const goalText = newGoalInput.value.trim();
+            if (goalText) {
+                goals.push(goalText);
+                renderGoals();
+                newGoalInput.value = '';
+                saveGoals();
+            }
+        }
+
+        function removeGoal(index) {
+            goals.splice(index, 1);
+            renderGoals();
+            saveGoals();
+        }
+
+        function renderGoals() {
+            goalsList.innerHTML = goals.map((goal, index) => `
+                <div class="goal-item">
+                    <span class="bullet">•</span>
+                    <span class="goal-text">${goal}</span>
+                    <button class="delete-btn" onclick="removeGoal(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function saveGoals() {
+            localStorage.setItem('userGoals', JSON.stringify(goals));
+        }
+
+        function saveAndNavigate(page) {
+            if (goals.length < 1) {
+                alert('Please add at least one goal before continuing.');
+                return;
+            }
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

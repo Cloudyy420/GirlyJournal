@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unwind and Share Your Thoughts</title>
+    <link rel="stylesheet" href="thoughts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="thoughts-container">
+        <h2><i class="fas fa-feather-alt"></i> Unwind and Share Your Thoughts</h2>
+        <p class="subtitle">Take a moment to reflect on your day...</p>
+        
+        <div class="textarea-wrapper">
+            <textarea 
+                id="thoughts" 
+                rows="8" 
+                placeholder="What's on your mind? Share your thoughts, feelings, or memorable moments from today..."
+            ></textarea>
+            <div class="character-count">0 characters</div>
+        </div>
+
+        <button class="next-btn" onclick="saveAndNavigate('todo.html')">
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const textarea = document.getElementById('thoughts');
+        const charCount = document.querySelector('.character-count');
+        const nextBtn = document.querySelector('.next-btn');
+
+        textarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = `${count} characters`;
+            
+            // Save to localStorage as user types
+            localStorage.setItem('userThoughts', this.value);
+        });
+
+        function saveAndNavigate(page) {
+            const thoughts = textarea.value.trim();
+            if (thoughts.length < 1) {
+                alert('Please share your thoughts before continuing.');
+                return;
+            }
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

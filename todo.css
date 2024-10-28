@@ -1,0 +1,231 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.todo-container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+h2 i {
+    margin-right: 10px;
+    color: #74b9ff;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.textarea-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #74b9ff;
+    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2);
+}
+
+textarea::placeholder {
+    color: #95a5a6;
+}
+
+.character-count {
+    position: absolute;
+    bottom: -25px;
+    right: 5px;
+    font-size: 0.9rem;
+    color: #95a5a6;
+}
+
+.next-btn {
+    background-color: #74b9ff;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.next-btn:hover {
+    background-color: #0984e3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.next-btn i {
+    font-size: 0.9em;
+}
+
+@media (max-width: 480px) {
+    .todo-container {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ... existing CSS ... */
+
+.todo-list-wrapper {
+    background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.todo-list {
+    margin-bottom: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.bullet {
+    color: #74b9ff;
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.todo-text {
+    flex: 1;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.add-todo-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+#new-todo {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#new-todo:focus {
+    outline: none;
+    border-color: #74b9ff;
+    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2);
+}
+
+.add-btn {
+    background: #74b9ff;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+    background: #0984e3;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ff7675;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.todo-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    color: #d63031;
+    transform: scale(1.1);
+}
+
+/* Add these to your existing media queries */
+@media (max-width: 480px) {
+    .todo-item {
+        padding: 0.6rem;
+    }
+
+    .todo-text {
+        font-size: 1rem;
+    }
+
+    #new-todo {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .add-btn {
+        padding: 0.6rem 1rem;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Affirmation</title>
+    <link rel="stylesheet" href="affirmations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="affirmation-container">
+        <h2><i class="fas fa-heart"></i> Your Daily Affirmation</h2>
+        <p class="subtitle">Take this positive thought with you today...</p>
+
+        <div class="affirmation-card">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p id="affirmation" class="affirmation-text"></p>
+            <i class="fas fa-quote-right quote-icon"></i>
+        </div>
+
+        <button class="next-btn" onclick="navigateTo('calendar.html')">
+            Next <i class="fas fa-check-circle"></i>
+        </button>
+    </div>
+
+    <script>
+        const affirmations = [
+            "I am capable of achieving great things",
+            "Every day is a new opportunity to grow",
+            "I choose to be confident and self-assured",
+            "I am worthy of love and respect",
+            "My potential is limitless",
+            "I trust in my journey",
+            "I radiate positivity and attract goodness",
+            "I am becoming the best version of myself",
+            "My possibilities are endless",
+            "I believe in myself and my dreams"
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const affirmationIndex = today.getDate() % affirmations.length;
+            const todaysAffirmation = affirmations[affirmationIndex];
+            
+            const affirmationElement = document.getElementById('affirmation');
+            affirmationElement.textContent = todaysAffirmation;
+            
+            // Save to localStorage
+            localStorage.setItem('dailyAffirmation', todaysAffirmation);
+        });
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

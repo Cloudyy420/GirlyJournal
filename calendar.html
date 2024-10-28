@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Review Today</title>
+    <link rel="stylesheet" href="calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="calendar-container">
+        <h2><i class="fas fa-calendar-alt"></i> Let's Review Today</h2>
+        <p class="subtitle">Select a date to begin your reflection...</p>
+        
+        <div class="date-picker-wrapper">
+            <input type="date" id="datePicker">
+        </div>
+
+        <button class="next-btn" onclick="validateAndNavigate('mood.html')">
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        // Set default date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('datePicker').value = today;
+            document.getElementById('datePicker').max = today; // Prevent future dates
+        });
+
+        function validateAndNavigate(page) {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) {
+                alert('Please select a date to continue.');
+                return;
+            }
+            // Save selected date to localStorage
+            localStorage.setItem('selectedDate', selectedDate);
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
